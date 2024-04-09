@@ -139,7 +139,17 @@ function placeBlock(x, y, z, color){
 
 
 const breakBlock = (x, y, z) => {
-  return { action: 'breakBlock', x, y, z };
+    temp = y
+    x = x + 5
+    y = z + 5
+    z = temp - 1
+    var currentMesh;
+    scene.children.forEach(function(mesh) {
+        if (mesh.x === x && mesh.y === y && mesh.z === z) {
+            currentMesh = mesh
+        }
+    })
+    scene.remove(currentMesh)
 };
 
 const historyChatElement = document.querySelector('#historyChat');
@@ -166,10 +176,16 @@ document.getElementById('fileInput').addEventListener('change',function() {
                         return prevItem.X === item.X && prevItem.Y === item.Y && prevItem.Z === item.Z;
                     });
                 })
-                if(blocks){
+                if(blocks.length == 1){
                     changes.push({ func: placeBlock, values: [blocks[0].X, blocks[0].Y, blocks[0].Z, blocks[0].Colour]})
+                } else {
+                    blocks = game[i - 1].BlocksInGrid.filter(item => {
+                        return !game[i].BlocksInGrid.some(prevItem => {
+                            return prevItem.X === item.X && prevItem.Y === item.Y && prevItem.Z === item.Z;
+                        });
+                    })
+                    changes.push({ func: breakBlock, values: [blocks[0].X, blocks[0].Y, blocks[0].Z]})
                 }
-
             }
         }
         document.getElementById('hider').style.display = "none"
