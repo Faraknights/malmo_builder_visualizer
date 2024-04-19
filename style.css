@@ -7,17 +7,71 @@ html, body{
 	width: 100%;
 	height: 100%;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	margin: 0;
 	overflow: hidden;
+}
+
+header{
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: center;
+	min-height: 40px;
+	width: 100%;
+	background-color: #11131b;
+}
+
+header > span{
+	display: block;
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-large;
+  order: 2;
+}
+
+header > .left{
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	margin-right: 15px;
+	cursor: pointer;
+	clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+  order: 1;
+}
+
+header > span[number="1"] ~ .left{
+	opacity: 0;
+	pointer-events: none;
+}
+
+header > .right{
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	margin-left: 15px;
+	cursor: pointer;
+	clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  order: 3;
+}
+
+
+header > .left{
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	margin-right: 15px;
+	cursor: pointer;
+	clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
 }
 
 #wrapper {
   display: grid;
   grid-template-columns: 1fr 400px;
   grid-gap: 10px;
-	height: 100%;
+	height: auto;
 	background-color: #40434f;
 }
 
